@@ -1,0 +1,8 @@
+README.md
+setup.py
+pdf_split.egg-info/PKG-INFO
+pdf_split.egg-info/SOURCES.txt
+pdf_split.egg-info/dependency_links.txt
+pdf_split.egg-info/entry_points.txt
+pdf_split.egg-info/requires.txt
+pdf_split.egg-info/top_level.txt

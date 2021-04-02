@@ -26,8 +26,6 @@ def pdf_splitter(path,folder,start,end):
             
              pdf_writer.write(out)
 
-        print('Created: {}'.format(output_filename))
-
 def merger(output_path, input_paths):
     pdf_writer = PdfFileWriter()
 
@@ -47,6 +45,7 @@ def main():
     ranges = sys.argv[2].split(',')
     start = int(ranges[0])
     end = int(ranges[1])
+    destination = sys.argv[3]
     tmp_folder = id_generator()
     os.mkdir(tmp_folder)
 
@@ -61,13 +60,10 @@ def main():
           paths.append(file)
 
         if paths:
-          merger('output/output.pdf',paths)
+          merger(destination,paths)
           shutil.rmtree(tmp_folder)
-
+          print ("convert successful, look at " + destination)
      else:
       print ("File not supported")
     else:
      print ("File not exist")
-
-if __name__=="__main__": 
-    main() 
