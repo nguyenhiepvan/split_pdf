@@ -46,11 +46,11 @@ def main():
     ranges = sys.argv[2].split(',')
     
     if ranges[0]:
-     start = ranges[0]
+     start = int(ranges[0])
     else:
      start = None
     if ranges[1]:
-     end = ranges[1]
+     end = int(ranges[1])
     else:
      end = None
 
