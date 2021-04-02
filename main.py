@@ -50,20 +50,17 @@ def main():
     os.mkdir(tmp_folder)
 
     if os.path.isfile(input):
-     if input.lower().endswith(('.pdf')):
-        pdf_splitter(input,tmp_folder,start,end)
-        paths = []
-        
-        for x in range(start,end):
-         file = '{}/input_page_{}.pdf'.format(tmp_folder,x)
-         if os.path.isfile(file):
-          paths.append(file)
+     pdf_splitter(input,tmp_folder,start,end)
+     paths = []
+    
+    for x in range(start,end):
+     file = '{}/input_page_{}.pdf'.format(tmp_folder,x)
+     if os.path.isfile(file):
+      paths.append(file)
 
-        if paths:
-          merger(destination,paths)
-          shutil.rmtree(tmp_folder)
-          print ("convert successful, look at " + destination)
-     else:
-      print ("File not supported")
+    if paths:
+      merger(destination,paths)
+      shutil.rmtree(tmp_folder)
+      print ("convert successful, look at " + destination)
     else:
      print ("File not exist")
