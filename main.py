@@ -4,18 +4,19 @@ import os
 import string
 import random
 import shutil
+import glob
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
-def pdf_splitter(path,folder,start,end):
+def pdf_splitter(path,folder,start = None,end = None):
     fname = os.path.splitext(os.path.basename(path))[0]
 
     pdf = PdfFileReader(path)
     for page in range(pdf.getNumPages()):
-        if (page+1 < start):
+        if start and (page+1 < start):
          continue
 
-        if (page+1 > end):
+        if end and (page+1 > end):
          break
 
         pdf_writer = PdfFileWriter()
@@ -43,20 +44,24 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def main(): 
     input = sys.argv[1]
     ranges = sys.argv[2].split(',')
-    start = int(ranges[0])
-    end = int(ranges[1])
+    
+    if ranges[0]:
+     start = ranges[0]
+    else:
+     start = None
+    if ranges[1]:
+     end = ranges[1]
+    else:
+     end = None
+
     destination = sys.argv[3]
     tmp_folder = id_generator()
     os.mkdir(tmp_folder)
 
     if os.path.isfile(input):
      pdf_splitter(input,tmp_folder,start,end)
-     paths = []
-    
-    for x in range(start,end):
-     file = '{}/input_page_{}.pdf'.format(tmp_folder,x)
-     if os.path.isfile(file):
-      paths.append(file)
+     paths = glob.glob(tmp_folder + '/input_page_*.pdf')
+     paths.sort()
 
     if paths:
       merger(destination,paths)
