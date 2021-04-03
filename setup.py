@@ -6,7 +6,7 @@ setuptools.setup(
     description="split pdf to smaller file",
     long_description_content_type="text/markdown",
     url="https://github.com/nguyenhiepvan/split_pdf",
-    author="Nguyễn Văn Hiệp",
+    author="Nguyen Van Hiep",
     author_email="nguyenhiepvan.bka@gmail.com",
     license="MIT",
     classifiers=[
