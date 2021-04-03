@@ -1,3 +1,0 @@
-[console_scripts]
-split_pdf = main:main
-
