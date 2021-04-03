@@ -22,7 +22,7 @@ def pdf_splitter(path,folder,start = None,end = None):
         pdf_writer = PdfFileWriter()
         pdf_writer.addPage(pdf.getPage(page))
 
-        output_filename = '{}/input_page_{}.pdf'.format(folder,page+1)
+        output_filename = '{}/{}.pdf'.format(folder,page+1)
         with open(output_filename, 'wb') as out:
             
              pdf_writer.write(out)
@@ -60,8 +60,8 @@ def main():
 
     if os.path.isfile(input):
      pdf_splitter(input,tmp_folder,start,end)
-     paths = glob.glob(tmp_folder + '/input_page_*.pdf')
-     paths.sort()
+     paths = glob.glob(tmp_folder + '/*.pdf')
+     paths.sort(key=lambda f: int(filter(str.isdigit, f)))
 
     if paths:
       merger(destination,paths)
