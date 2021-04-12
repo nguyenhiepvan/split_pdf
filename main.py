@@ -58,18 +58,23 @@ def main():
     tmp_folder = id_generator()
     os.mkdir(tmp_folder)
 
-    if os.path.isfile(input):
-     pdf_splitter(input,tmp_folder,start,end)
-     paths = glob.glob(tmp_folder + '/*.pdf')
-     if len(paths) > 9:
-      paths.sort(key=lambda f: int(filter(str.isdigit, f)))
+    try:
+        if os.path.isfile(input):
+         pdf_splitter(input,tmp_folder,start,end)
+         paths = glob.glob(tmp_folder + '/*.pdf')
+         if len(paths) > 9:
+          paths.sort(key=lambda f: int(filter(str.isdigit, f)))
 
-    if paths:
-      tmp_file = tmp_folder + "/output.pdf"
-      merger(tmp_file,paths)
-      os.system('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+         if paths:
+          tmp_file = tmp_folder + "/output.pdf"
+          merger(tmp_file,paths)
+          os.system('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=' + destination +' ' + tmp_file)
-      shutil.rmtree(tmp_folder)
-      print ("convert successful, look at " + destination)
-    else:
-     print ("File not exist")
+          print ("convert successful, look at " + destination)
+         else:
+          print ("File not exist")
+    except Exception as e:
+        print ("Something went wrong!")
+    finally:
+        shutil.rmtree(tmp_folder)
+    
