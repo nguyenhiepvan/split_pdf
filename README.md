@@ -20,3 +20,4 @@ e.g: `split_pdf test.pdf 1,10 output/output.pdf`
 
 #Requirements
 - pypdf
+- gs
