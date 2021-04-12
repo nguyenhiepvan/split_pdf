@@ -61,7 +61,7 @@ def main():
     if os.path.isfile(input):
      pdf_splitter(input,tmp_folder,start,end)
      paths = glob.glob(tmp_folder + '/*.pdf')
-     if len(paths > 9):
+     if len(paths) > 9:
       paths.sort(key=lambda f: int(filter(str.isdigit, f)))
 
     if paths:
