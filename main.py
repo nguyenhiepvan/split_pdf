@@ -64,7 +64,10 @@ def main():
      paths.sort(key=lambda f: int(filter(str.isdigit, f)))
 
     if paths:
-      merger(destination,paths)
+      tmp_file = tmp_folder + "/output.pdf"
+      merger(tmp_file,paths)
+      os.system('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+-dNOPAUSE -dQUIET -dBATCH -sOutputFile=' + destination +' ' + tmp_file)
       shutil.rmtree(tmp_folder)
       print ("convert successful, look at " + destination)
     else:
